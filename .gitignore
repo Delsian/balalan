@@ -53,3 +53,14 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# West updates
+.west/
+nrf/
+/.history
+/modules
+/zephyr/
+/test
+/nrfxlib/
+/tools
+/fw/build

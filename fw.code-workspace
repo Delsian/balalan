@@ -1,0 +1,147 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+        "west": "west",
+        "ninja": "ninja",
+
+        "cmake.configureOnOpen": false,
+
+        "armToolchainPath": "${env:GNUARMEMB_TOOLCHAIN_PATH}",
+
+        "files.associations": {
+            "xstring": "cpp"
+        },
+
+        // The number of spaces a tab is equal to. This setting is overridden
+        // based on the file contents when `editor.detectIndentation` is true.
+        "editor.tabSize": 4,
+
+        // Insert spaces when pressing Tab. This setting is overriden
+        // based on the file contents when `editor.detectIndentation` is true.
+        "editor.insertSpaces": true,
+
+        // When opening a file, `editor.tabSize` and `editor.insertSpaces`
+        // will be detected based on the file contents. Set to false to keep
+        // the values you've explicitly set, above.
+        "editor.detectIndentation": false,
+        "editor.rulers": [80, 120],
+        "editor.cursorBlinking": "smooth",
+
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 3000,
+
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": [],
+
+        "editor.renderWhitespace": "all",
+        "files.watcherExclude": {
+            "**/.git/objects/**": true,
+            "**/.git/subtree-cache/**": true,
+            "**/node_modules/**": true,
+            "**/tmp/**": true,
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/node_modules": true,
+            "**/bower_components": true,
+            "**/dist/**": true,
+            "**/log/**": true,
+            "**/logs/**": true,
+            "**/.fdk/**": true,
+            "**/.west/**": true,
+            "**/.vscode/**": true,
+            "${workspaceRoot}/../zephyr-ws/**": true,
+            "**/.history/**": true
+        },
+        "files.exclude": {
+            "**/.git/objects/**": true,
+            "**/.git/subtree-cache/**": true,
+            "**/node_modules/**": true,
+            "**/tmp/**": true,
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/node_modules": true,
+            "**/bower_components": true,
+            "**/dist/**": true,
+            "**/log/**": true,
+            "**/.fdk/**": true,
+            "**/.west/**": true,
+            "**/.history/**": true
+        },
+        "search.exclude": {
+            "**/.git/objects/**": true,
+            "**/.git/subtree-cache/**": true,
+            "**/node_modules/**": true,
+            "**/tmp/**": true,
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/node_modules": true,
+            "**/bower_components": true,
+            "**/dist/**": true,
+            "**/log/**": true,
+            "**/.west/**": true,
+            "**/.history/**": true
+        },
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.patterns": {
+            "prj.conf": "prj*.conf"
+        },
+        "editor.renderControlCharacters": false,
+        "cortex-debug.variableUseNaturalFormat": false,
+        "nrf-connect.applications": [
+            "${workspaceFolder:fw}",
+        ],
+        "editor.fontSize": 16,
+    },
+	"tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Build",
+                "type": "process",
+                "command": "${config:west}",
+                "options": {
+                    "cwd": "${workspaceFolder:fw}",
+                    "env": {
+                        "ZEPHYR_BASE": "${workspaceFolder:zephyr}"
+                    }
+                },
+                "args": [
+                    "build",
+                    "-p",
+                    "auto",
+                    "-d",
+                    "${config:app_tx.build_dir}",
+                    "-b",
+                    "${config:app_tx.board}/${config:app_tx.board_soc}${config:app_tx.board_cpu}",
+                    "${workspaceFolder:fw}",
+                    "${config:app_tx.zephyr_config}",
+                    "-DBOARD_ROOT=${workspaceFolder:fw}",
+                    "${config:app_tx.compile_args}"
+                ],
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                },
+                "dependsOn": [
+                     "Build",
+                 ],
+                "problemMatcher": [ "$gcc" ]
+            },
+		]
+	}
+}
