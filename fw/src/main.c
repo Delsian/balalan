@@ -1,19 +1,66 @@
-#include <zephyr/types.h>
-#include <zephyr/kernel.h>
+#include "balalan.h"
 #include <dk_buttons_and_leds.h>
+#include <zephyr/bluetooth/conn.h>
 #include <zephyr/logging/log.h>
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);
+extern struct bt_conn *default_conn;
 
 static void on_button_changed_handler(uint32_t button_state, uint32_t has_changed)
 {
-    LOG_DBG("Button pressed");
+    LOG_DBG("Board button pressed");
+
+    /* Button 1: Start/stop scanning */
+    if (has_changed & DK_BTN1_MSK) {
+        if (button_state & DK_BTN1_MSK) {
+            if (!default_conn) {
+                LOG_INF("Starting BLE scan for joysticks...");
+                //bt_le_scan_start(BT_HCI_LE_SCAN_ACTIVE, NULL);
+            }
+        }
+    }
+
+    /* Button 2: Disconnect */
+    if (has_changed & DK_BTN2_MSK) {
+        if (button_state & DK_BTN2_MSK) {
+            if (default_conn) {
+                LOG_INF("Disconnecting from joystick");
+                bt_conn_disconnect(default_conn, BT_HCI_ERR_REMOTE_USER_TERM_CONN);
+            }
+        }
+    }
 }
 
 int main(void)
 {
-    dk_leds_init();
-    dk_buttons_init(on_button_changed_handler);
+    int err;
+
+    LOG_INF("Starting BLE Joystick example");
+
+    err = dk_leds_init();
+    if (err) {
+        LOG_ERR("LEDs init failed (err %d)", err);
+        return err;
+    }
+
+    err = dk_buttons_init(on_button_changed_handler);
+    if (err) {
+        LOG_ERR("Buttons init failed (err %d)", err);
+        return err;
+    }
+
+    err = joys_init();
+    if (err) {
+        LOG_ERR("Bluetooth enable failed (err %d)", err);
+        return err;
+    }
+
+    /* LED status indicators:
+     * LED1: Connected to joystick
+     * LED2: Joystick button pressed
+     * LED3: Joystick moved
+     * LED4: Available for future use
+     */
 
     while (1) {
         k_sleep(K_FOREVER);

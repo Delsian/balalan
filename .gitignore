@@ -64,3 +64,4 @@ nrf/
 /nrfxlib/
 /tools
 /fw/build
+/fw/.history

@@ -1,8 +1,17 @@
 {
 	"folders": [
-		{
-			"path": "."
-		}
+        {
+            "name": "fw",
+            "path": "./fw"
+        },
+        {
+            "name": "zephyr",
+            "path": "./zephyr"
+        },
+        {
+            "name": "nrf",
+            "path": "./nrf"
+        }
 	],
 	"settings": {
         "west": "west",
@@ -13,7 +22,8 @@
         "armToolchainPath": "${env:GNUARMEMB_TOOLCHAIN_PATH}",
 
         "files.associations": {
-            "xstring": "cpp"
+            "xstring": "cpp",
+            "balalan.h": "c"
         },
 
         // The number of spaces a tab is equal to. This setting is overridden
@@ -106,12 +116,19 @@
             "${workspaceFolder:fw}",
         ],
         "editor.fontSize": 16,
+
+        "build_dir": "${workspaceFolder:fw}/build",
+        "zephyr_config": "-DOVERLAY_CONFIG=prj.conf;prj_debug.conf",
+        "board_overlay": "-DDTC_OVERLAY_FILE=${workspaceFolder:fw}/boards/nrf54l15dk.overlay",
+        "compile_args": "",
+        "debug_soc": "NRF54L15_M33",
+        "svdFile": "nrf54l15_application.svd"
     },
 	"tasks": {
         "version": "2.0.0",
         "tasks": [
             {
-                "label": "Build",
+                "label": "BuildBalalan",
                 "type": "process",
                 "command": "${config:west}",
                 "options": {
@@ -125,13 +142,14 @@
                     "-p",
                     "auto",
                     "-d",
-                    "${config:app_tx.build_dir}",
+                    "${config:build_dir}",
                     "-b",
-                    "${config:app_tx.board}/${config:app_tx.board_soc}${config:app_tx.board_cpu}",
+                    "nrf54l15dk/nrf54l15/cpuapp",
                     "${workspaceFolder:fw}",
-                    "${config:app_tx.zephyr_config}",
+                    "${config:zephyr_config}",
                     "-DBOARD_ROOT=${workspaceFolder:fw}",
-                    "${config:app_tx.compile_args}"
+                    "${config:compile_args}",
+                    "${config:board_overlay}"
                 ],
                 "group": {
                     "kind": "build",
@@ -143,5 +161,42 @@
                 "problemMatcher": [ "$gcc" ]
             },
 		]
-	}
+	},
+    "launch": {
+        "configurations": [
+            {
+                "name": "Run balalan",
+                "cwd": "${workspaceFolder:fw}",
+                "executable": "${config:build_dir}/fw/zephyr/zephyr.elf",
+                "request": "launch",
+                "type": "cortex-debug",
+                "runToEntryPoint": "main",
+                "servertype": "jlink",
+                "serverpath": "JLinkGDBServerCLExe",
+                "device": "${config:debug_soc}",
+                "svdFile": "${config:svdFile}",
+                "interface": "swd",
+                "armToolchainPath": "${config:armToolchainPath}/arm-zephyr-eabi/bin/",
+                "toolchainPrefix": "arm-zephyr-eabi",
+                "showDevDebugOutput": "parsed",
+                "liveWatch": {
+                    "enabled": true,
+                    "samplesPerSecond": 4
+                },
+                "rttConfig": {
+                    "enabled": true,
+                    "address": "auto",
+                    "decoders": [
+                        {
+                            "label": "",
+                            "port": 0,
+                            "type": "console"
+                        }
+                    ]
+                },
+                "preLaunchTask": "BuildBalalan",
+                "serverArgs": ["-speed", "4000"]
+            },
+        ]
+    }
 }
