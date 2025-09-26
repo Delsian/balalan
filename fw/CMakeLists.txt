@@ -15,3 +15,9 @@ target_sources(app PRIVATE
 )
 
 include_directories(src)
+
+# Add debug-specific compiler flags
+if(BUILD_TYPE STREQUAL "debug")
+    target_compile_options(app PRIVATE -O0 -g3)
+    target_compile_definitions(app PRIVATE DEBUG=1)
+endif()

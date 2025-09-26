@@ -139,8 +139,27 @@
                 },
                 "args": [
                     "build",
-                    "-p",
-                    "auto",
+                    "-d",
+                    "${config:build_dir}"
+                ],
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                },
+                "problemMatcher": [ "$gcc" ]
+            },
+            {
+                "label": "ConfigureBuild",
+                "type": "process",
+                "command": "${config:west}",
+                "options": {
+                    "cwd": "${workspaceFolder:fw}",
+                    "env": {
+                        "ZEPHYR_BASE": "${workspaceFolder:zephyr}"
+                    }
+                },
+                "args": [
+                    "build",
                     "-d",
                     "${config:build_dir}",
                     "-b",
@@ -152,12 +171,8 @@
                     "${config:board_overlay}"
                 ],
                 "group": {
-                    "kind": "build",
-                    "isDefault": true
+                    "kind": "build"
                 },
-                "dependsOn": [
-                     "Build",
-                 ],
                 "problemMatcher": [ "$gcc" ]
             },
 		]

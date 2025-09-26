@@ -55,32 +55,56 @@ static struct bt_gatt_subscribe_params hid_report_params = {
 /* GATT Discovery completed callback */
 static void gatt_dm_discovery_completed(struct bt_gatt_dm *dm, void *context) {
     LOG_INF("Service discovery completed");
+    bt_gatt_dm_data_print(dm);
+    const struct bt_gatt_dm_attr *gatt_service_attr;
+    const struct bt_gatt_dm_attr *gatt_chrc;
+    const struct bt_gatt_dm_attr *gatt_desc;
 
-    /* Find HID Report characteristic */
-    const struct bt_gatt_dm_attr *gatt_chrc = bt_gatt_dm_char_by_uuid(dm, BT_UUID_HID_REPORT);
-    if (!gatt_chrc) {
-        LOG_ERR("HID Report characteristic not found");
-        goto release;
+    gatt_service_attr = bt_gatt_dm_service_get(dm);
+    gatt_chrc = bt_gatt_dm_char_next(dm, NULL);
+
+    /* Iterate through all characteristics in the HID service */
+    while (gatt_chrc != NULL) {
+        struct bt_gatt_chrc *chrc_val = bt_gatt_dm_attr_chrc_val(gatt_chrc);
+
+        if (!bt_uuid_cmp(chrc_val->uuid, BT_UUID_HID_REPORT)) {
+            LOG_INF("Found HID Report characteristic, handle: 0x%04x, properties: 0x%02x",
+                    chrc_val->value_handle, chrc_val->properties);
+
+            /* Look for input reports (notifications enabled) */
+            if (chrc_val->properties & BT_GATT_CHRC_NOTIFY) {
+                LOG_INF("This appears to be an input report (has NOTIFY property)");
+
+                /* Find the CCC descriptor for this characteristic */
+                gatt_desc = bt_gatt_dm_desc_by_uuid(dm, gatt_chrc, BT_UUID_GATT_CCC);
+                if (gatt_desc) {
+                    LOG_INF("Found CCC descriptor at handle: 0x%04x", gatt_desc->handle);
+
+                    /* Set subscription parameters */
+                    hid_report_params.value_handle = chrc_val->value_handle;
+                    hid_report_params.ccc_handle = gatt_desc->handle;
+
+                    /* Subscribe to notifications */
+                    int ret = bt_gatt_subscribe(bt_gatt_dm_conn_get(dm), &hid_report_params);
+                    if (ret && ret != -EALREADY) {
+                        LOG_ERR("Subscribe failed (err %d)", ret);
+                    } else {
+                        LOG_INF("Successfully subscribed to HID input reports");
+                        goto release; // Successfully subscribed to first input report
+                    }
+                } else {
+                    LOG_WRN("No CCC descriptor found for this HID Report characteristic");
+                }
+            } else {
+                LOG_INF("This HID Report doesn't support notifications (likely output/feature report)");
+            }
+        }
+
+        /* Get next characteristic */
+        gatt_chrc = bt_gatt_dm_char_next(dm, gatt_chrc);
     }
 
-    /* Find CCC descriptor */
-    const struct bt_gatt_dm_attr *gatt_desc = bt_gatt_dm_desc_by_uuid(dm, gatt_chrc, BT_UUID_GATT_CCC);
-    if (!gatt_desc) {
-        LOG_ERR("HID Report CCC descriptor not found");
-        goto release;
-    }
-
-    /* Set subscription parameters */
-    hid_report_params.value_handle = gatt_chrc->handle + 1;
-    hid_report_params.ccc_handle = gatt_desc->handle;
-
-    /* Subscribe to notifications */
-    int ret = bt_gatt_subscribe(bt_gatt_dm_conn_get(dm), &hid_report_params);
-    if (ret && ret != -EALREADY) {
-        LOG_ERR("Subscribe failed (err %d)", ret);
-    } else {
-        LOG_INF("Subscribed to HID reports");
-    }
+    LOG_ERR("No suitable HID input report characteristic found");
 
 release:
     bt_gatt_dm_data_release(dm);
