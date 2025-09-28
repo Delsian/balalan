@@ -4,7 +4,6 @@
 #include <zephyr/logging/log.h>
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);
-extern struct bt_conn *default_conn;
 
 static void on_button_changed_handler(uint32_t button_state, uint32_t has_changed)
 {
@@ -14,8 +13,7 @@ static void on_button_changed_handler(uint32_t button_state, uint32_t has_change
     if (has_changed & DK_BTN1_MSK) {
         if (button_state & DK_BTN1_MSK) {
             if (!default_conn) {
-                LOG_INF("Starting BLE scan for joysticks...");
-                //bt_le_scan_start(BT_HCI_LE_SCAN_ACTIVE, NULL);
+                LOG_INF("Button 1 pressed - connection handling done by joys module");
             }
         }
     }

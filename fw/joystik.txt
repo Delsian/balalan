@@ -1,0 +1,80 @@
+> ls ff:ff:12:04:4e:52
+Listing services...
+   -- SERVICE: 00001800-0000-1000-8000-00805f9b34fb [Generic Access]
+   --   --> CHAR: 00002a00-0000-1000-8000-00805f9b34fb, Handle: 3 (0x0003) - READ NOTIFY  - [Device Name]
+   --   --> CHAR: 00002a01-0000-1000-8000-00805f9b34fb, Handle: 5 (0x0005) - READ  - [Appearance]
+   --   --> CHAR: 00002a04-0000-1000-8000-00805f9b34fb, Handle: 7 (0x0007) - READ  - [Peripheral Preferred Connection Parameters]
+   -- SERVICE: 00001801-0000-1000-8000-00805f9b34fb [Generic Attribute]
+   --   --> CHAR: 00002a05-0000-1000-8000-00805f9b34fb, Handle: 10 (0x000a) - INDICATE  - [Service Changed]
+   -- SERVICE: 0000180a-0000-1000-8000-00805f9b34fb [Device Information]
+   --   --> CHAR: 00002a50-0000-1000-8000-00805f9b34fb, Handle: 14 (0x000e) - READ  - [PnP ID]
+   -- SERVICE: 00001812-0000-1000-8000-00805f9b34fb [Human Interface Device]
+   --   --> CHAR: 00002a4e-0000-1000-8000-00805f9b34fb, Handle: 17 (0x0011) - READ WRITE NO RESPONSE  - [Protocol Mode]
+   --   --> CHAR: 00002a4d-0000-1000-8000-00805f9b34fb, Handle: 19 (0x0013) - READ NOTIFY  - [Report]
+   --   --> CHAR: 00002a4d-0000-1000-8000-00805f9b34fb, Handle: 23 (0x0017) - READ NOTIFY  - [Report]
+   --   --> CHAR: 00002a4d-0000-1000-8000-00805f9b34fb, Handle: 27 (0x001b) - READ NOTIFY  - [Report]
+   --   --> CHAR: 00002a4d-0000-1000-8000-00805f9b34fb, Handle: 31 (0x001f) - READ NOTIFY  - [Report]
+   --   --> CHAR: 00002a4b-0000-1000-8000-00805f9b34fb, Handle: 35 (0x0023) - READ  - [Report Map]
+   --   --> CHAR: 00002a4a-0000-1000-8000-00805f9b34fb, Handle: 37 (0x0025) - READ  - [HID Information]
+   --   --> CHAR: 00002a4c-0000-1000-8000-00805f9b34fb, Handle: 39 (0x0027) - WRITE NO RESPONSE  - [HID Control Point]
+   -- SERVICE: 0000180f-0000-1000-8000-00805f9b34fb [Battery Service]
+   --   --> CHAR: 00002a19-0000-1000-8000-00805f9b34fb, Handle: 42 (0x002a) - READ  - [Battery Level]
+Listing descriptors...
+   --  DESCRIPTORS: 00002800-0000-1000-8000-00805f9b34fb, [Primary Service Declaration], Handle: 1 (0x0001)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 2 (0x0002)
+   --  DESCRIPTORS: 00002a00-0000-1000-8000-00805f9b34fb, [Device Name], Handle: 3 (0x0003)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 4 (0x0004)
+   --  DESCRIPTORS: 00002a01-0000-1000-8000-00805f9b34fb, [Appearance], Handle: 5 (0x0005)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 6 (0x0006)
+   --  DESCRIPTORS: 00002a04-0000-1000-8000-00805f9b34fb, [Peripheral Preferred Connection Parameters], Handle: 7 (0x0007)
+   --  DESCRIPTORS: 00002800-0000-1000-8000-00805f9b34fb, [Primary Service Declaration], Handle: 8 (0x0008)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 9 (0x0009)
+   --  DESCRIPTORS: 00002a05-0000-1000-8000-00805f9b34fb, [Service Changed], Handle: 10 (0x000a)
+   --  DESCRIPTORS: 00002902-0000-1000-8000-00805f9b34fb, [Client Characteristic Configuration], Handle: 11 (0x000b)
+   --  DESCRIPTORS: 00002800-0000-1000-8000-00805f9b34fb, [Primary Service Declaration], Handle: 12 (0x000c)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 13 (0x000d)
+   --  DESCRIPTORS: 00002a50-0000-1000-8000-00805f9b34fb, [PnP ID], Handle: 14 (0x000e)
+   --  DESCRIPTORS: 00002800-0000-1000-8000-00805f9b34fb, [Primary Service Declaration], Handle: 15 (0x000f)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 16 (0x0010)
+   --  DESCRIPTORS: 00002a4e-0000-1000-8000-00805f9b34fb, [Protocol Mode], Handle: 17 (0x0011)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 18 (0x0012)
+   --  DESCRIPTORS: 00002a4d-0000-1000-8000-00805f9b34fb, [Report], Handle: 19 (0x0013)
+   --  DESCRIPTORS: 00002902-0000-1000-8000-00805f9b34fb, [Client Characteristic Configuration], Handle: 20 (0x0014)
+   --  DESCRIPTORS: 00002908-0000-1000-8000-00805f9b34fb, [Report Reference], Handle: 21 (0x0015)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 22 (0x0016)
+   --  DESCRIPTORS: 00002a4d-0000-1000-8000-00805f9b34fb, [Report], Handle: 23 (0x0017)
+   --  DESCRIPTORS: 00002902-0000-1000-8000-00805f9b34fb, [Client Characteristic Configuration], Handle: 24 (0x0018)
+   --  DESCRIPTORS: 00002908-0000-1000-8000-00805f9b34fb, [Report Reference], Handle: 25 (0x0019)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 26 (0x001a)
+   --  DESCRIPTORS: 00002a4d-0000-1000-8000-00805f9b34fb, [Report], Handle: 27 (0x001b)
+   --  DESCRIPTORS: 00002902-0000-1000-8000-00805f9b34fb, [Client Characteristic Configuration], Handle: 28 (0x001c)
+   --  DESCRIPTORS: 00002908-0000-1000-8000-00805f9b34fb, [Report Reference], Handle: 29 (0x001d)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 30 (0x001e)
+   --  DESCRIPTORS: 00002a4d-0000-1000-8000-00805f9b34fb, [Report], Handle: 31 (0x001f)
+   --  DESCRIPTORS: 00002902-0000-1000-8000-00805f9b34fb, [Client Characteristic Configuration], Handle: 32 (0x0020)
+   --  DESCRIPTORS: 00002908-0000-1000-8000-00805f9b34fb, [Report Reference], Handle: 33 (0x0021)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 34 (0x0022)
+   --  DESCRIPTORS: 00002a4b-0000-1000-8000-00805f9b34fb, [Report Map], Handle: 35 (0x0023)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 36 (0x0024)
+   --  DESCRIPTORS: 00002a4a-0000-1000-8000-00805f9b34fb, [HID Information], Handle: 37 (0x0025)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 38 (0x0026)
+   --  DESCRIPTORS: 00002a4c-0000-1000-8000-00805f9b34fb, [HID Control Point], Handle: 39 (0x0027)
+   --  DESCRIPTORS: 00002800-0000-1000-8000-00805f9b34fb, [Primary Service Declaration], Handle: 40 (0x0028)
+   --  DESCRIPTORS: 00002803-0000-1000-8000-00805f9b34fb, [Characteristic Declaration], Handle: 41 (0x0029)
+   --  DESCRIPTORS: 00002a19-0000-1000-8000-00805f9b34fb, [Battery Level], Handle: 42 (0x002a)
+Reading characteristics...
+  -- READ: 00002a00-0000-1000-8000-00805f9b34fb [Device Name] (0x0003), None, Value: b'Magicsee R1       '
+  -- READ: 00002a01-0000-1000-8000-00805f9b34fb [Appearance] (0x0005), None, Value: b'\x00\x00'
+  -- READ: 00002a04-0000-1000-8000-00805f9b34fb [Peripheral Preferred Connection Parameters] (0x0007), None, Value: b'\x1e\x00<\x00\x04\x00\xe8\x03'
+  -- READ: 00002a05-0000-1000-8000-00805f9b34fb [Service Changed] (0x000a), None, Value:
+  -- READ: 00002a50-0000-1000-8000-00805f9b34fb [PnP ID] (0x000e), None, Value: b'\x02\x8a$f\x8246'
+  -- READ: 00002a4e-0000-1000-8000-00805f9b34fb [Protocol Mode] (0x0011), None, Value: b'\x01'
+  -- READ: 00002a4d-0000-1000-8000-00805f9b34fb [Report] (0x0013), None, Value: b'\x00\x00\x00\x00'
+  -- READ: 00002a4d-0000-1000-8000-00805f9b34fb [Report] (0x0017), None, Value: b'\x00\x00'
+  -- READ: 00002a4d-0000-1000-8000-00805f9b34fb [Report] (0x001b), None, Value: b'\x00\x00\x00\x00\x00\x00\x00\x00'
+  -- READ: 00002a4d-0000-1000-8000-00805f9b34fb [Report] (0x001f), None, Value: b'\x00\x00'
+  -- READ: 00002a4b-0000-1000-8000-00805f9b34fb [Report Map] (0x0023), None, Value: b'\x05\x0c\t\x01\xa1\x01\x85\x02\t\xe9\t\xea\t\xcd\t\xe2\t\xb6\t\xb5\n#\x02\x15\x00%\x01u\x01\x95\x10\x81\x02\xc0\x05\x01\t\x05\xa1\x01\x85\x04\t\x01\xa1\x00\x05\t\x19\x01)\x0c\x95\x0c\x81\x02\x05\x01\t0\t1%\x02u\x02\x95\x02\x81\x02\xc0\xc0\x05\x01\t\x02\xa1\x01\x85\x01\t\x01\xa1\x00\x05\t\x19\x01)\x03%\x01u\x01\x95\x03\x81\x02u\x05\x95\x01\x81\x01\x05\x01\t0\t1\t8\x15\x81%\x7fu\x08\x95\x03\x81\x06\xc0\xc0\x05\x01\t\x06\xa1\x01\x85\x03u\x01\x95\x08\x05\x07\x19\xe0)\xe7\x15\x00%\x01\x81\x02\x95\x01u\x08\x81\x03\x95\x05u\x01\x05\x08\x19\x01)\x05\x91\x02\x95\x01u\x03\x91\x03\x95\x06u\x08\x15\x00%\xff\x05\x07\x19\x00)\xff\x81\x00\xc0'
+  -- READ: 00002a4a-0000-1000-8000-00805f9b34fb [HID Information] (0x0025), None, Value: b'\x11\x01\x00\x01'
+  -- READ: 00002a4c-0000-1000-8000-00805f9b34fb [HID Control Point] (0x0027), None, Value:
+  -- READ: 00002a19-0000-1000-8000-00805f9b34fb [Battery Level] (0x002a), None, Value: b'd'
+>
