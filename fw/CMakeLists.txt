@@ -11,7 +11,6 @@ project(balalan)
 
 target_sources(app PRIVATE
     src/main.c
-    src/joys.c
 )
 
 include_directories(src)
