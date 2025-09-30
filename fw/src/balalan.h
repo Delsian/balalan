@@ -10,3 +10,4 @@ extern struct bt_conn *default_conn;
 
 /* Function declarations */
 void joys_init(void);
+void imu_init(void);

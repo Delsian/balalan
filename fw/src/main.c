@@ -47,6 +47,9 @@ int main(void)
         return err;
     }
 
+    /* Initialize IMU sensors (MPU6050 + HMC5883) */
+    imu_init();
+
     joys_init();
 
     while (1) {

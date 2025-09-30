@@ -5,7 +5,7 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/zbus/zbus.h>
 
-LOG_MODULE_REGISTER(joys, LOG_LEVEL_DBG);
+LOG_MODULE_REGISTER(joys, LOG_LEVEL_INF);
 
 struct button_msg {
     uint16_t buttons;
@@ -81,7 +81,7 @@ static void connected(struct bt_conn *conn, uint8_t err)
         bt_gatt_subscribe(conn, reports[i].params);
     }
 
-    LOG_DBG("Subscribed to all reports. Ready!\n");
+    LOG_DBG("Subscribed to all reports. Ready!");
 }
 
 static void scan_cb(const bt_addr_le_t *addr, int8_t rssi, uint8_t adv_type,
@@ -101,7 +101,7 @@ static void scan_cb(const bt_addr_le_t *addr, int8_t rssi, uint8_t adv_type,
             if (strstr(name, "Magicsee")) {
                 char addr_str[BT_ADDR_LE_STR_LEN];
                 bt_addr_le_to_str(addr, addr_str, sizeof(addr_str));
-                LOG_INF("Found %s\n", name);
+                LOG_INF("Found %s", name);
 
                 bt_le_scan_stop();
                 struct bt_le_conn_param *param = BT_LE_CONN_PARAM_DEFAULT;
@@ -115,7 +115,7 @@ static void scan_cb(const bt_addr_le_t *addr, int8_t rssi, uint8_t adv_type,
 
 static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
-    LOG_INF("Disconnected (reason %u)\n", reason);
+    LOG_INF("Disconnected (reason %u)", reason);
     bt_conn_unref(default_conn);
     default_conn = NULL;
     bt_le_scan_start(BT_LE_SCAN_PASSIVE, scan_cb);
