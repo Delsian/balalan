@@ -9,4 +9,4 @@
 extern struct bt_conn *default_conn;
 
 /* Function declarations */
-int joys_init(void);
+void joys_init(void);

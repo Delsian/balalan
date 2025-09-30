@@ -47,18 +47,7 @@ int main(void)
         return err;
     }
 
-    err = joys_init();
-    if (err) {
-        LOG_ERR("Bluetooth enable failed (err %d)", err);
-        return err;
-    }
-
-    /* LED status indicators:
-     * LED1: Connected to joystick
-     * LED2: Joystick button pressed
-     * LED3: Joystick moved
-     * LED4: Available for future use
-     */
+    joys_init();
 
     while (1) {
         k_sleep(K_FOREVER);
