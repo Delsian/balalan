@@ -27,6 +27,26 @@ static void on_button_changed_handler(uint32_t button_state, uint32_t has_change
             }
         }
     }
+
+        /* Button 3: Test fan control */
+    // if (has_changed & DK_BTN3_MSK) {
+    //     if (button_state & DK_BTN3_MSK) {
+    //         static uint8_t test_speed = 0;
+    //         test_speed += 50;
+    //         if (test_speed > 255) test_speed = 0;
+    //         LOG_INF("Testing fan at speed %u", test_speed);
+    //         fan_set_speed(test_speed);
+    //     }
+    // }
+
+    /* Button 4: Get fan RPM */
+    if (has_changed & DK_BTN4_MSK) {
+        if (button_state & DK_BTN4_MSK) {
+            uint16_t rpm = fan_get_rpm();
+            LOG_INF("Current fan RPM: %u", rpm);
+        }
+    }
+
 }
 
 int main(void)
@@ -41,11 +61,13 @@ int main(void)
         return err;
     }
 
-    err = dk_buttons_init(on_button_changed_handler);
-    if (err) {
-        LOG_ERR("Buttons init failed (err %d)", err);
-        return err;
-    }
+    fan_init();
+
+    // err = dk_buttons_init(on_button_changed_handler);
+    // if (err) {
+    //     LOG_ERR("Buttons init failed (err %d)", err);
+    //     return err;
+    // }
 
     /* Initialize IMU sensors (MPU6050 + HMC5883) */
     imu_init();

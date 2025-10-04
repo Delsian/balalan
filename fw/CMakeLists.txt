@@ -13,6 +13,7 @@ target_sources(app PRIVATE
     src/main.c
     src/joys.c
     src/imu.c
+    src/fan.c
 )
 
 include_directories(src)

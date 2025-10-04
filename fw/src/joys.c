@@ -11,13 +11,7 @@ struct button_msg {
     uint16_t buttons;
 };
 
-ZBUS_CHAN_DEFINE(button_chan,                // Channel name
-    struct button_msg,                     // Message type
-    NULL,                                    // Validator (optional)
-    NULL,                                    // User data (optional)
-    ZBUS_OBSERVERS_EMPTY,                    // No observers for now
-    ZBUS_MSG_INIT(.buttons = 0)              // Initial value
-);
+ZBUS_CHAN_DECLARE(button_chan);
 
 struct report_sub {
     struct bt_gatt_subscribe_params *params;
@@ -71,7 +65,7 @@ static void connected(struct bt_conn *conn, uint8_t err)
         return;
     }
 
-    LOG_INF("Connected — subscribing to reports...");
+    LOG_INF("Connected – subscribing to reports...");
 
     for (size_t i = 0; i < ARRAY_SIZE(reports); ++i) {
         reports[i].params->notify = reports[i].notify_cb;
